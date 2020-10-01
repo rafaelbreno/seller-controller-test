@@ -1,18 +1,33 @@
+# Dependencies
 /node_modules
+/vendor
+
+# Public folder
 /public/hot
 /public/fonts
 /public/css
 /public/js
 /public/images
 /public/storage
+
+# Storage
 /storage/*.key
-/vendor
+
+# IDE Folders
+/.vscode
 /.idea
+
+# Environment Files
 .env
 .env.backup
+
+# Logs/Cache
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
 _ide_helper.php
+
+# Docker Generated Logs/Cache
+/db
