@@ -13,8 +13,13 @@
     <!-- Fonts -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
+    @stack('styles')
 </head>
 <body>
+    <div class="container-fluid">
+        @yield('content')
+    </div>
+
     @stack('scripts')
 </body>
 </html>
