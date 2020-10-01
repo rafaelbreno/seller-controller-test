@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\Uuid;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -40,5 +39,17 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+    ];
+
+    const VALIDATION_RULES = [
+        'name' => [
+            'string', 'required'
+        ],
+        'password' => [
+            'string', 'required', 'min:3'
+        ],
+        'email' => [
+            'email', 'required', 'unique:user'
+        ],
     ];
 }
