@@ -12,7 +12,7 @@ window.Popper = require('popper.js').default;
 
 require('bootstrap');
 
-window.axios = require('axios');
+window.dt = window.datatable = require('datatables.net-bs4')
 
 window.axios = require('axios');
 
