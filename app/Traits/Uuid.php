@@ -12,7 +12,7 @@ trait Uuid
     /**
      * Boot method to generated User's uuid
      */
-    protected static function bootSetUuidTrait() : void
+    protected static function bootUuid() : void
     {
         static::creating(function ($model) {
             if(! $model->getKey()) {
