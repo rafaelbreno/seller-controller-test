@@ -19,6 +19,7 @@
                     <td>Name:</td>
                     <td>Email:</td>
                     <td>Created_at:</td>
+                    <td>Action:</td>
                 </tr>
                 </thead>
             </table>
@@ -49,9 +50,23 @@
                             {data: 'name'},
                             {data: 'email'},
                             {data: 'created_at'},
+                            {
+                                data: 'id',
+                                render: function (data) {
+                                    return `
+                                        <a class="btn btn-success"
+                                                href="{{ url('/seller') }}/${data}"
+                                                target="_blank"
+                                        >
+                                            <i class="fas fa-book-open"></i>
+                                            Add Commission
+                                        </a>
+                                    `;
+                                }
+                            }
                         ]
                     });
-                })
+                });
         });
     </script>
 @endpush
