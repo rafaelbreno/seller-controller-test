@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, Uuid;
 
+
+    protected $table = "users";
     /**
      * The attributes that are mass assignable.
      *
@@ -45,11 +47,8 @@ class User extends Authenticatable
         'name' => [
             'string', 'required'
         ],
-        'password' => [
-            'string', 'required', 'min:3'
-        ],
         'email' => [
-            'email', 'required', 'unique:user'
+            'email', 'required', 'unique:users'
         ],
     ];
 }
