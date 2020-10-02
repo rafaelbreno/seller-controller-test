@@ -44,21 +44,33 @@
                 }
             ```
 - List all Sellers
-    - Method: _GET_
-    - URL: `/seller`
-    - Request Body:
-        -   ```json
-                {}
-            ```
-    - Response Body:
-        -   ```json
-                {
-                    "id":   "string, uuid",
-                    "name": "string, not unique",
-                    "email": "string, unique",
-                    "commission": "integer" 
-                }
-            ```
+    - _View:_
+        - Method: _GET_
+        - URL: `/seller`
+        - Request Body:
+            -   ```json
+                    {}
+                ```
+        - Response Body:
+            -   ```json
+                    {}
+                ```
+    - _API:_
+        - Method: _GET_
+        - URL: `/api/sellers`
+        - Request Body:
+            -   ```json
+                    {}
+                ```
+        - Response Body:
+            -   ```json
+                    {
+                        "id":   "string, uuid",
+                        "name": "string, not unique",
+                        "email": "string, unique",
+                        "commission": "integer" 
+                    }
+                ```
 - Register new Seller
     - Method: _POST_
     - URL: `/sale/create`
@@ -83,7 +95,7 @@
 
 - List all Sellers Sale
     - Method: _GET_
-    - URL: `/seller`
+    - URL: `/seller/{id}`
     - Request Body:
         -   ```json
                 {
