@@ -36,11 +36,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param User $user
+     * @param string $user
      * @return Response
      */
-    public function show(User $user)
+    public function show(string $user)
     {
-        //
+//        User::whereDetailed($user)
+        return response()->view('user.show', [
+            'data' => User::whereDetailed($user)
+        ]);
     }
 }

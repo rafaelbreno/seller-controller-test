@@ -51,4 +51,21 @@ class User extends Authenticatable
             'email', 'required', 'unique:users'
         ],
     ];
+
+    public function formatDetailed()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email
+        ];
+    }
+
+    static public function whereDetailed(string $id)
+    {
+        return self::where('id', $id)->get()
+            ->map
+            ->formatDetailed()
+            ->first();
+    }
 }
