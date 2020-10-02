@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/seller');
+
+Route::resource('/seller', \App\Http\Controllers\UserController::class);
