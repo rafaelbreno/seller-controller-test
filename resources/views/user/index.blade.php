@@ -31,7 +31,7 @@
     <script>
         function getUsers() {
             return axios({
-                url: "{{ url('/get-user') }}",
+                url: "{{ url('/api/sellers') }}",
                 method: "GET"
             }).then(resp => {
                 return resp.data;
