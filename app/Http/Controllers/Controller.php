@@ -21,15 +21,11 @@ class Controller extends BaseController
      */
     protected function returnJson(
         array $data,
-        bool $success,
         array $addons = array(),
         int $status = 200) : JsonResponse
     {
         $data = array_merge_recursive($data, $addons);
 
-        return response()->json([
-            'success' => $success,
-            'data' => $data
-        ], $status);
+        return response()->json($data, $status);
     }
 }
