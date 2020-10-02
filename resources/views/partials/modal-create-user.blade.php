@@ -2,11 +2,12 @@
         class="btn btn-primary"
         data-toggle="modal"
         data-target="#createUserModal">
+    <i class="fas fa-user-plus"></i>
     Create New Seller
 </button>
 
 <!-- Modal -->
-<div class="modal fade"
+<div class="modal fade text-left"
      id="createUserModal"
      tabindex="-1"
      aria-labelledby="createUserModalLabel"
@@ -14,7 +15,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create new Seller</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -29,6 +30,7 @@
                                name="name"
                                id="name"
                         >
+                        <ul id="nameErrors"></ul>
                     </div>
                     <div class="form-group">
                         <label for="email">E-mail:</label>
@@ -37,20 +39,48 @@
                                name="email"
                                id="email"
                         >
+                        <ul id="emailErrors"></ul>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button"
                         class="btn btn-primary"
-                        id="buttonCreateUser">Save changes</button>
+                        id="buttonCreateUser">
+                    <i class="fas fa-user-plus"></i>
+                    Create New Seller
+                </button>
             </div>
         </div>
     </div>
 </div>
 @push('scripts')
 <script>
+    function setErrors(data, inputs) {
+        inputs.forEach((item, index) => {
+            $(`input[id="${item}"]`)
+                .removeClass('is-invalid')
+                .removeClass('is-valid')
+                .addClass('is-valid');
+            $(`ul[id="${item}Errors"]`)
+                .find('li')
+                .remove()
+        });
+        Object.keys(data).forEach((inputId) => {
+            let errorDiv = $(`ul[id="${inputId}Errors"]`);
+            let input = $(`input[id="${inputId}"]`);
+            errorDiv.find('li').remove();
+            input.addClass('is-invalid').removeClass('is-valid');
+            Object.keys(data[inputId]).forEach((errorPos) => {
+                console.log(data[inputId][errorPos]);
+                errorDiv.append($('<li>', {
+                    text: data[inputId][errorPos]
+                }))
+            });
+        });
+    }
     $(document).ready(function () {
+        let inputs = ["name", "email"];
         $('button[id="buttonCreateUser"]').on('click', function () {
             let routeData = $('input[id="route-data"]');
             axios({
@@ -64,6 +94,7 @@
                 console.log(resp);
             }).catch(err => {
                 console.log(err.response);
+                setErrors(err.response.data.errors, inputs);
             });
         });
     });
