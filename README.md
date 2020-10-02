@@ -47,14 +47,8 @@
     - _View:_
         - Method: _GET_
         - URL: `/seller`
-        - Request Body:
-            -   ```json
-                    {}
-                ```
-        - Response Body:
-            -   ```json
-                    {}
-                ```
+        - Returns Blade View
+            - `user/index.blade.php`
     - _API:_
         - Method: _GET_
         - URL: `/api/sellers`
