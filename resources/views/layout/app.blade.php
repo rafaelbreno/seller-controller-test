@@ -17,6 +17,7 @@
 </head>
 <body>
     <div class="container-fluid">
+        @include('partials.alert')
         @yield('content')
     </div>
 

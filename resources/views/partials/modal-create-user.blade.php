@@ -22,7 +22,7 @@
             </div>
             <div class="modal-body">
                 <div id="userCreateForm">
-                    <input type="hidden" id="route-data" data-url="{{ url('') }}" data-method="POST">
+                    <input type="hidden" id="route-data" data-url="{{ url('/seller') }}" data-method="POST">
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text"
@@ -72,7 +72,6 @@
             errorDiv.find('li').remove();
             input.addClass('is-invalid').removeClass('is-valid');
             Object.keys(data[inputId]).forEach((errorPos) => {
-                console.log(data[inputId][errorPos]);
                 errorDiv.append($('<li>', {
                     text: data[inputId][errorPos]
                 }))
@@ -92,8 +91,13 @@
                 }
             }).then(resp => {
                 console.log(resp);
+                $('div[id="createUserModal"]').modal('hide');
+                $('div[id="alertMessage"]').append($('<span>', {
+                    text: "Seller created successfully<br>reload to apply modification"
+                }));
+                $('div[id="alertBox"]').show();
+
             }).catch(err => {
-                console.log(err.response);
                 setErrors(err.response.data.errors, inputs);
             });
         });

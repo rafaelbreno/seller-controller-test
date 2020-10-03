@@ -43,7 +43,6 @@
         $(document).ready(function () {
             getUsers()
                 .then(data => {
-                    console.log(data);
                     $('table[id="usersTable"]').DataTable({
                         data: data,
                         columns: [
