@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function sales()
     {
-        return $this->hasMany(Sale::class, 'sale_id');
+        return $this->hasMany(Sale::class, 'seller_id');
     }
 
     public function formatDetailed()
@@ -63,6 +63,19 @@ class User extends Authenticatable
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email
+        ];
+    }
+
+    public function formatAllInfo()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'sales' => $this->sales
+                            ->map
+                            ->formatAllInfo()
+                            ->toArray()
         ];
     }
 

@@ -26,8 +26,26 @@ class Sale extends Model
         ]
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->sale_value = $model->sale_value * 10000;
+            $model->commission = intval($model->sale_value * 0.085);
+        });
+    }
+
     public function seller()
     {
         return $this->belongsTo(User::class, 'seller_id');
+    }
+
+    public function formatAllInfo()
+    {
+        return [
+            'id' => $this->id,
+            'sale_value' => number_format($this->sale_value / 10000, 2),
+            'commission' => number_format($this->commission / 10000, 2)
+        ];
     }
 }
