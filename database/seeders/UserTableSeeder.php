@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Sale;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,12 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(30)->create();
+        User::factory()
+            ->has(
+                Sale::factory()
+                    ->count(3),
+                'sales'
+            )->count(30)
+            ->create();
     }
 }
