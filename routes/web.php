@@ -15,4 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/seller');
 
-Route::resource('/seller', \App\Http\Controllers\UserController::class);
+Route::resource('/seller', \App\Http\Controllers\UserController::class)
+    ->only([
+        'index', 'store', 'show'
+    ]);
