@@ -23,7 +23,7 @@ class Sale extends Model
             'string', 'required'
         ],
         'sale_value' => [
-            'integer', 'required', 'min:1'
+            'integer', 'required', 'min:1', 'max:420000'
         ]
     ];
 
