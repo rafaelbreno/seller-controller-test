@@ -6,6 +6,7 @@
 - > $ npm install
 - > $ npm run dev
 - Configure _.env.example_ file
+    - I used [Mailtrap.io](https://mailtrap.io/) to mock email
 - > $ cp .env.example .env
 - > $ php artisan key:generate
 #### Running the application
