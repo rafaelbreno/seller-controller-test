@@ -7,6 +7,7 @@ use Faker\Generator;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\Artisan;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -18,6 +19,7 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
         $this->faker = Factory::create();
+        Artisan::call('db:seed');
     }
 
     public function tearDown(): void
