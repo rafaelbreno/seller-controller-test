@@ -43,4 +43,29 @@ class UserTest extends TestCase
             ->assertJson($data);
     }
 
+    /**
+     * Test case to Sale create method
+     * This test needed a User's id, so have it
+     * it's needed to create a new one
+     * @return void
+     */
+    public function testCreateSale()
+    {
+        $userId = User::create([
+            'name' => $this->faker->name,
+            'email' => $this->faker->email,
+        ])->id;
+
+        $data = [
+            'seller_id' => $userId,
+            'sale_value' => 1000
+        ];
+
+        $response = $this->post(route('sale.create'), $data);
+
+        $data['sale_value'] *= 10000;
+        $data['commission'] = intval($data['sale_value'] * 0.085);
+
+        $response->assertStatus(200)->assertJson($data);
+    }
 }
