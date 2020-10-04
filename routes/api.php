@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\CreateSale;
+use App\Http\Controllers\API\GetSales;
+use App\Http\Controllers\API\GetSellers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,21 +21,10 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::get('/sellers', function () {
-    return response()->json(
-        \App\Models\User::all()->toArray()
-        , 200);
-});
+Route::get('/sellers', GetSellers::class);
 
-Route::get('/sales/{sellerId}', function ($sellerId) {
-    return response()->json(
-        \App\Models\Sale::where('seller_id', $sellerId)
-            ->orderBy('created_at')
-            ->get()
-            ->toArray()
-        ,200);
-})->name('seller.sales');
+Route::get('/sales/{sellerId}', GetSales::class)
+    ->name('seller.sales');
 
-Route::post('/addsale', function (Request $request) {
-
-})->name('sale.create');
+Route::post('/sale/create', CreateSale::class)
+    ->name('sale.create');
