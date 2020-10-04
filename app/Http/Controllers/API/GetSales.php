@@ -20,6 +20,7 @@ class GetSales extends Controller
             Sale::where('seller_id', $sellerId)
                 ->orderBy('created_at', 'desc')
                 ->get()
+                ->map->formatAllInfo()
                 ->toArray()
             ,200);
     }

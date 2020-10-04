@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Uuid;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -45,7 +46,8 @@ class Sale extends Model
         return [
             'id' => $this->id,
             'sale_value' => number_format($this->sale_value / 10000, 2),
-            'commission' => number_format($this->commission / 10000, 2)
+            'commission' => number_format($this->commission / 10000, 2),
+            'created_at' => Carbon::createFromDate($this->create_at)->format("H:s d/m/Y")
         ];
     }
 }
