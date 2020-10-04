@@ -23,3 +23,16 @@ Route::get('/sellers', function () {
         \App\Models\User::all()->toArray()
         , 200);
 });
+
+Route::get('/sales/{sellerId}', function ($sellerId) {
+    return response()->json(
+        \App\Models\Sale::where('seller_id', $sellerId)
+            ->orderBy('created_at')
+            ->get()
+            ->toArray()
+        ,200);
+})->name('seller.sales');
+
+Route::post('/addsale', function (Request $request) {
+
+})->name('sale.create');
