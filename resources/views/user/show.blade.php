@@ -22,6 +22,7 @@
                        step="0.01"
                        id="sale_value"
                        name="sale_value">
+                <ul id="sale_valueErrors"></ul>
             </div>
             <div class="form-group">
                 <button class="btn btn-success"
@@ -74,6 +75,8 @@
             }
             let addSaleRoute = $('input[id="createSale"]');
 
+            let inputs = ["sale_valueErrors"];
+
             $('button[id="addSale"]').on('click', function () {
                 axios({
                     url: addSaleRoute.data('url'),
@@ -84,9 +87,15 @@
                     }
                 }).then(resp => {
                     getSales();
+                    let alertDiv = $('div[id="alertMessage"]');
+                    alertDiv.find('span').remove();
+                    alertDiv.append($('<span>', {
+                        text: "Sale successfully created"
+                    }));
+                    $('div[id="alertBox"]').show();
                     console.log(resp)
                 }).catch(err => {
-                    console.log(err.response)
+                    window.setErrors(err.response.data.errors, inputs)
                 })
             })
 
