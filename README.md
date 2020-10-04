@@ -5,6 +5,7 @@
 - > $ composer install
 - > $ npm install
 - > $ npm run dev
+- Configure _.env.example_ file
 - > $ cp .env.example .env
 - > $ php artisan key:generate
 #### Running the application
@@ -65,7 +66,7 @@
                         "commission": "integer" 
                     }
                 ```
-- Register new Seller
+- Register new Sell
     - Method: _POST_
     - URL: `/sale/create`
     - Request Body:
