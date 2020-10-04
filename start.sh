@@ -16,4 +16,4 @@ docker-compose exec app php artisan route:clear
 
 docker-compose exec app php artisan cache:clear
 
-docker-compose exec app php artisan schedule:run
+docker-compose exec app .docker/bin/cron.sh
