@@ -56,28 +56,6 @@
 </div>
 @push('scripts')
 <script>
-    function setErrors(data, inputs) {
-        inputs.forEach((item, index) => {
-            $(`input[id="${item}"]`)
-                .removeClass('is-invalid')
-                .removeClass('is-valid')
-                .addClass('is-valid');
-            $(`ul[id="${item}Errors"]`)
-                .find('li')
-                .remove()
-        });
-        Object.keys(data).forEach((inputId) => {
-            let errorDiv = $(`ul[id="${inputId}Errors"]`);
-            let input = $(`input[id="${inputId}"]`);
-            errorDiv.find('li').remove();
-            input.addClass('is-invalid').removeClass('is-valid');
-            Object.keys(data[inputId]).forEach((errorPos) => {
-                errorDiv.append($('<li>', {
-                    text: data[inputId][errorPos]
-                }))
-            });
-        });
-    }
     $(document).ready(function () {
         let inputs = ["name", "email"];
         $('button[id="buttonCreateUser"]').on('click', function () {
@@ -93,12 +71,12 @@
                 console.log(resp);
                 $('div[id="createUserModal"]').modal('hide');
                 $('div[id="alertMessage"]').append($('<span>', {
-                    text: "Seller created successfully<br>reload to apply modification"
+                    text: "Seller created successfully, reload to apply modification"
                 }));
                 $('div[id="alertBox"]').show();
 
             }).catch(err => {
-                setErrors(err.response.data.errors, inputs);
+                window.setErrors(err.response.data.errors, inputs);
             });
         });
     });
