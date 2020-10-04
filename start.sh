@@ -25,6 +25,9 @@ docker-compose exec app php artisan view:clear
 # Cleaning route cache
 docker-compose exec app php artisan route:clear
 
+# Cleaning config cache
+docker-compose exec app php artisan config:clear
+
 # Cleaning app cache
 docker-compose exec app php artisan cache:clear
 
