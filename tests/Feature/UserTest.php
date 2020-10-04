@@ -66,6 +66,18 @@ class UserTest extends TestCase
         $data['sale_value'] *= 10000;
         $data['commission'] = intval($data['sale_value'] * 0.085);
 
-        $response->assertStatus(200)->assertJson($data);
+        $response
+            ->assertStatus(200)
+            ->assertJson($data);
+    }
+
+    public function testGetAllSales()
+    {
+        $response = $this->get(route('seller.all'));
+        $data = User::all()->toArray();
+
+        $response
+            ->assertStatus(200)
+            ->assertJson($data);
     }
 }
