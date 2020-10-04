@@ -11,15 +11,21 @@
         </div>
         <div class="card-body">
             <div class="form-group">
-                <input type="hidden" id="user_id" data-id="{{ $data['id'] }}">
-                <label for="sell_value">Add new Sale</label>
+                <input type="hidden"
+                       id="createSale"
+                       data-url="{{ route('sale.create') }}"
+                       data-method="POST"
+                       data-id="{{ $data['id'] }}">
+                <label for="sale_value">Add new Sale</label>
                 <input class="form-control"
                        type="number"
                        step="0.01"
-                       id="sell_value" name="sell_value">
+                       id="sale_value"
+                       name="sale_value">
             </div>
             <div class="form-group">
-                <button class="btn btn-success" id="addSale">
+                <button class="btn btn-success"
+                        id="addSale">
                     <i class="fas fa-money-check mr-1"></i> Commit Sale
                 </button>
             </div>
@@ -49,7 +55,6 @@
                 }).then(resp => {
                     salesTable.find('tr').remove()
                     resp.data.forEach((item, index) => {
-                        console.log(item);
                         salesTable.append(
                             $('<tr>')
                                 .append($('<td>', {
@@ -67,13 +72,25 @@
                     console.log(err.response)
                 })
             }
-            getSales()
+            let addSaleRoute = $('input[id="createSale"]');
 
-            $('button[id="addSale]').click(function () {
+            $('button[id="addSale"]').on('click', function () {
                 axios({
-
+                    url: addSaleRoute.data('url'),
+                    method: addSaleRoute.data('method'),
+                    data: {
+                        seller_id: addSaleRoute.data('id'),
+                        sale_value: $('input[id="sale_value"]').val()
+                    }
+                }).then(resp => {
+                    getSales();
+                    console.log(resp)
+                }).catch(err => {
+                    console.log(err.response)
                 })
             })
+
+            getSales()
         });
     </script>
 @endpush
