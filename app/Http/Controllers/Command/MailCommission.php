@@ -18,6 +18,11 @@ class MailCommission extends Controller
 
     public function __invoke()
     {
+        $this->getMails()->each(function ($item, $key) {
+            Mail::to($key)->send(
+                new CommissionMail($item)
+            );
+        });
     }
 
     protected function getMails()
