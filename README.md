@@ -1,3 +1,9 @@
+# Seller Controller
+- A simple project that a shop would be able to register its seller
+- Enabling the company to:
+    - Register Sales
+    - Control sale commission
+    - Send details about the sales to the seller by email
 ### How to run
 #### Install Dependencies
 - > $ git clone https://github.com/rafaelbreno/seller-controller-test
@@ -14,6 +20,7 @@
 1. Shell Script
     - > $ ./start.sh
     - This will start a Laravel Docker based application automatically
+    - There are more info about the file, in the file, all commented
 2. Docker
     - > $ chmod -R 777 storage/ storage/*
     - > $ docker-compose up -d
@@ -22,6 +29,12 @@
     - > $ php artisan migrate:fresh
 - After that you can access the app in the following url:
     - `http://localhost:8000/`
+#### Mocking Application
+- > $ php artisan test
+    - It will run some tests
+    - All stored at: _'tests/feature/UserTest.php'_
+- > $ php artisan db:seed
+    - To fill the database with dummy data
 ### Problem Description:
 - Application:
     - Develop a Sales and Sellers API, to calculate the Seller's commission of each sale 
