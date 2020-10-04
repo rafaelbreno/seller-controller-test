@@ -16,8 +16,8 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('seller_id');
-            $table->integer('sale_value');
-            $table->integer('commission');
+            $table->unsignedInteger('sale_value');
+            $table->unsignedInteger('commission');
             $table->timestamps();
         });
     }
