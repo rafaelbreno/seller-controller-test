@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Sale;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 /**
@@ -75,6 +74,22 @@ class UserTest extends TestCase
     {
         $response = $this->get(route('seller.all'));
         $data = User::all()->toArray();
+
+        $response
+            ->assertStatus(200)
+            ->assertJson($data);
+    }
+
+    public function testGetUsersAllSales()
+    {
+        $userId = User::all()->first()->id;
+        $data = Sale::where('seller_id', $userId)
+            ->get()
+            ->map
+            ->formatAllInfo()
+            ->toArray();
+
+        $response = $this->get(route('seller.sales', $userId));
 
         $response
             ->assertStatus(200)
