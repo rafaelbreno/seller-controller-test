@@ -1,6 +1,6 @@
-<div class="alert alert-success alert-dismissible fade show w-75 mx-auto"
+<div class="alert alert-success alert-dismissible position-absolute fade show"
      id="alertBox"
-     style="z-index: 99; display: none"
+     style="z-index: 99; left: 32.5%; top: 15%; width: 35%; display: none"
      role="alert">
     <div id="alertMessage"></div>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
