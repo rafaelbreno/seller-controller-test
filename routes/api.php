@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::get('/sellers', GetSellers::class);
+Route::get('/sellers', GetSellers::class)
+    ->name('seller.all');
 
 Route::get('/sales/{sellerId}', GetSales::class)
     ->name('seller.sales');
