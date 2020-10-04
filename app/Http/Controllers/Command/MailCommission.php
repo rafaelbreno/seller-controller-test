@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Command;
 
 use App\Http\Controllers\Controller;
 use App\Mail\CommissionMail;
-use App\Models\Sale;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -29,7 +29,7 @@ class MailCommission extends Controller
     {
         return DB::table('sales')
             ->join('users', 'users.id', '=', 'sales.seller_id')
-            ->select('sales.seller_id', 'sales.sale_value', 'sales.commission', 'sales.created_at', 'users.email')
+            ->select('sales.seller_id', 'sales.sale_value', 'sales.commission', 'sales.created_at', 'users.name', 'users.email')
             ->get()
             ->groupBy('email')
             ->map(function ($sale) {
@@ -40,13 +40,14 @@ class MailCommission extends Controller
     public function mapMailData($sale)
     {
         return [
-            'total_sales' => $sale->sum('sale_value'),
-            'total_commission' => $sale->sum('commission'),
+            'name' => $sale->first()->name,
+            'total_sales' => "R$" . number_format($sale->sum('sale_value') / 10000, 2),
+            'total_commission' => "R$" . number_format($sale->sum('commission') / 10000, 2),
             'sales' => $sale->map(function ($var) {
                 return [
-                    'sale_value' => $var->sale_value,
-                    'commission' => $var->commission,
-                    'created_at' => $var->created_at
+                    'sale_value' => "R$" . number_format($var->sale_value / 10000, 2),
+                    'commission' => "R$" . number_format($var->commission / 10000, 2),
+                    'created_at' => Carbon::createFromDate($var->created_at)->format("H:s d/m/Y")
                 ];
             })->toArray()
         ];
